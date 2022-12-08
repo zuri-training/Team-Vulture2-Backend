@@ -8,5 +8,5 @@ app.use("/", (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Our App is running at port ${PORT}`);
+    console.log(`Our App is running on port ${PORT}`);
 })
