@@ -12,9 +12,3 @@ app.use("/", route)
 app.listen(port, function(){
     console.log(`app listening on port ${port}`)
 })
-
-app.get('/', (req, res) => {
-  res.send('Hey this is my API running 🥳')
-})
-
-module.exports = app
