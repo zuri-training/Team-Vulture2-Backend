@@ -1,14 +1,14 @@
-const express = require("express");
-const app = express();
-const db = require("./src/config/database")
+const express = require("express")
+const {config} = require("dotenv")
+const connect = require("./src/config/database")
+const route = require("./src/router/route")
+connect()
+config()
+const port = process.env.PORT || 3000
+const app = express()
+app.use(express.json())
+app.use("/", route)
 
-
-const PORT = 4000;
-
-app.use("/", (req, res) => {
-    res.send(`Hello Team-Vulture2`);
-})
-
-app.listen(PORT, () => {
-    console.log(`Our App is running at port ${PORT}`);
+app.listen(port, function(){
+    console.log(`app listening on port ${port}`)
 })
