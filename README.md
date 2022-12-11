@@ -38,3 +38,219 @@ These commands put the application in development mode and directs our applicati
 Add whatever you wished to contribute and make a pull request back to the upstream repository which will then be reviewed
 authentication or API keys. 
 
+## Booking Flight API Reference
+
+### Getting Started
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, `http://127.0.0.1:3000/` except if another port is specified. 
+- Authentication: This version of the application does not require authentication or API keys. 
+
+
+**Note: All https requests can be make using postman app or any other similar app or extension**
+
+### Error Handling
+Errors are returned as JSON objects in the following format:
+```
+{
+    "success": false,
+    "message": "resource not found"
+}
+```
+The API will return four error types when requests fail:
+- 400: Bad request
+- 401: Unauthorized
+- 404: Resource Not Found
+- 500: Server error 
+
+### Endpoints 
+
+#### POST /users
+- General:
+    - register a new user relative to the details supllied
+    - Request Body: the body will be passed as a rawjson data
+    ```
+    {
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725",
+        "password": "user1password"
+    }
+    ```
+    - Returns: a single new user object
+- Sample: `http://127.0.0.1:3000/users`
+```
+{
+    "success": true,
+    "message": "new user registered",
+    "user": {
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725",
+        "password": "user1password",
+        "_id": "63962a19683eedcd74dcede0",
+        "createdAt": "2022-12-11T19:06:01.467Z",
+        "updatedAt": "2022-12-11T19:06:01.467Z",
+        "__v": 0
+    }
+}
+```
+
+#### POST /login
+- General:
+    - login a user relative to the details supllied
+    - Request Body: the body will be passed as a rawjson data
+    ```
+    {
+        "email": "user1e@mail.com",
+        "password": "newuser1password"
+    }
+    ```
+    - Returns: verify if the user exist and if the password supplied is correct after which it returns the details of the user
+- Sample: `http://127.0.0.1:3000/login`
+```
+{
+    "success": true,
+    "message": "User found",
+    "user": {
+        "_id": "63962c1a683eedcd74dcede7",
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725",
+        "password": "newuser1password",
+        "createdAt": "2022-12-11T19:14:34.327Z",
+        "updatedAt": "2022-12-11T19:14:34.327Z",
+        "__v": 0
+    }
+}
+```
+
+#### GET /users
+- General:
+    - Fetches all users
+    - Request Arguments: none
+    - Returns: An object with details of all the userss
+- Sample: `http://127.0.0.1:3000/users`
+```
+{
+    "success": true,
+    "message": "Users found",
+    "users": [
+        {
+            "_id": "6396280076dcb966709f735f",
+            "username": "Tolulophey",
+            "email": "sample@mail.com",
+            "firstName": "Tolulope",
+            "lastName": "Amole",
+            "phoneNumber": "08063673201",
+            "password": "12345",
+            "createdAt": "2022-12-11T18:57:04.126Z",
+            "updatedAt": "2022-12-11T18:57:04.126Z",
+            "__v": 0
+        },
+        {
+            "_id": "6396283a76dcb966709f7361",
+            "username": "User1",
+            "email": "user1e@mail.com",
+            "firstName": "New",
+            "lastName": "User",
+            "phoneNumber": "08034352725",
+            "password": "user1password",
+            "createdAt": "2022-12-11T18:58:02.890Z",
+            "updatedAt": "2022-12-11T18:58:02.890Z",
+            "__v": 0
+        },
+        {
+            "_id": "63962a19683eedcd74dcede0",
+            "username": "User2",
+            "email": "user2e@mail.com",
+            "firstName": "New",
+            "lastName": "User",
+            "phoneNumber": "08034352725",
+            "password": "user2password",
+            "createdAt": "2022-12-11T19:06:01.467Z",
+            "updatedAt": "2022-12-11T19:06:01.467Z",
+            "__v": 0
+        }
+    ],
+    "total": 3
+}
+```
+
+#### GET /users/:id
+- General:
+    - Fetches a single user whose id is passed as parameter in the request url
+    - Request Arguments: id of the user
+    - Returns: An object with details of the user whose id was passed as parameter
+- Sample: `http://127.0.0.1:3000/users/6396283a76dcb966709f7361`
+```
+{
+    "success": true,
+    "message": "User found",
+    "user": {
+        "_id": "6396283a76dcb966709f7361",
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725",
+        "password": "user1password",
+        "createdAt": "2022-12-11T18:58:02.890Z",
+        "updatedAt": "2022-12-11T18:58:02.890Z",
+        "__v": 0
+    }
+}
+```
+
+#### PUT /users/:id
+- General:
+    - edit/update a specified user details using the id of the user
+    - Request Arguments: the http url containing the id of the user and a raw json data request body in the format below
+    ```
+    {
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725",
+        "password": "newuser1password"
+    }
+    ```
+    - Returns: status message(user updated successfully and the details of the user updated)
+- Sample: `http://127.0.0.1:3000/users/6396283a76dcb966709f7361`
+```
+{
+    "success": true,
+    "message": "User updated successfully",
+    "user": {
+        "_id": "6396283a76dcb966709f7361",
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725",
+        "password": "newuser1password",
+        "createdAt": "2022-12-11T18:58:02.890Z",
+        "updatedAt": "2022-12-11T19:11:29.631Z",
+        "__v": 0
+    }
+}
+```
+
+#### DELETE /users/:id
+- General:
+    - Deletes a specified user using the id of the user
+    - Request Arguments: id of the user 
+    - Returns: deleted successfully message
+- Sample: `http://127.0.0.1:3000/users/6396283a76dcb966709f7361`
+```
+{
+    "success": true,
+    "message": "user deleted successfully"
+}
+```
+

@@ -82,6 +82,39 @@ exports.getUser = async (req, res)=>{
     }
 }
 
+//user login
+exports.loginUser = async (req, res)=>{
+    try {
+        const {email, password} = req.body
+        const user = await User.findOne({email: email})
+        if(!user){
+             return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+        if(user.password !== password){
+            // localStorage.setItem("authenticated", false)
+            return res.status(401).json({
+                success: false,
+                message: "User not authorized"
+            })
+        }
+        // localStorage.setItem("authenticated", true)
+        return res.status(200).json({
+            success: true,
+            message: "User found",
+            user
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
 //edit user
 exports.updateUser = async (req, res)=>{
     try {

@@ -15,6 +15,4 @@ const connect = async ()=>{
         console.log(err)
     }
 }
-
-
 module.exports = connect
