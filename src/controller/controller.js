@@ -3,7 +3,7 @@ const UserFile = require("../models/userFile")
 const Term = require("../models/terms")
 const Condition = require("../models/conditions")
 const Policy = require("../models/policies")
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 
 
@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 exports.registerUser= async (req, res)=>{
     try {
         const user = await req.body;
-        const hash = await bcrypt.hash(user.password, 10)
+        const hash = await bcryptjs.hash(user.password, 10)
         user.password = hash
         const registered = await User.create(user)
         if(!registered){
@@ -24,7 +24,14 @@ exports.registerUser= async (req, res)=>{
         return res.status(201).json({
             success: true,
             message: "new user registered",
-            user: registered
+            user: {
+                user_id: registered._id.toString(),
+                username: registered.username,
+                email: registered.email,
+                firstName: registered.firstName,
+                lastName: registered.lastName,
+                phoneNumber: registered.phoneNumber,
+            }
                 })        
     } catch (error) {
         res.status(500).json({
@@ -36,7 +43,7 @@ exports.registerUser= async (req, res)=>{
 }
 
 
-//get all users
+//get all users with the permission to admins alone
 exports.getAllUsers = async (req, res)=>{
     try {
         const users = await User.find({})
@@ -75,7 +82,14 @@ exports.getUser = async (req, res)=>{
         return res.status(200).json({
             success: true,
             message: "User found",
-            user
+            user: {
+                user_id: user._id.toString(),
+                username: user.username,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phoneNumber: user.phoneNumber,
+            }
         })         
     } catch (error) {
         res.status(500).json({
@@ -91,7 +105,7 @@ exports.loginUser = async (req, res)=>{
     try {
         const {email, password} = req.body
         const user = await User.findOne({email: email})
-        const passValid = await bcrypt.compare(password, user.password)
+        const passValid = await bcryptjs.compare(password, user.password)
         if(!user){
              return res.status(404).json({
                 success: false,
@@ -133,8 +147,7 @@ exports.updateUser = async (req, res)=>{
             username: update.username,
             firstName: update.firstName,
             lastName: update.lastName,
-            phoneNumber: update.phoneNumber,
-            password: update.password   
+            phoneNumber: update.phoneNumber
         })
         if(!newUser){
              return res.status(404).json({
@@ -145,7 +158,39 @@ exports.updateUser = async (req, res)=>{
         return res.status(200).json({
             success: true,
             message: "User updated successfully",
-            user: await User.findOne({_id: req.params.id})
+            user: {
+                user_id: req.params.id,
+                username: update.username,
+                email: update.email,
+                firstName: update.firstName,
+                lastName: update.lastName,
+                phoneNumber: update.phoneNumber,
+            }
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//change password
+exports.changePassword = async (req, res)=>{
+    try {
+        let newPassword = await req.body
+        const hash = await bcryptjs.hash(newPassword.password, 10)
+        const newUser = await User.findByIdAndUpdate(req.params.id, {password: hash})
+        if(!newUser){
+             return res.status(404).json({
+                success: false,
+                message: "User not updated"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Password changed successfully"
         })         
     } catch (error) {
         res.status(500).json({
