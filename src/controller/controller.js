@@ -3,6 +3,8 @@ const UserFile = require("../models/userFile")
 const Term = require("../models/terms")
 const Condition = require("../models/conditions")
 const Policy = require("../models/policies")
+const bcrypt = require('bcrypt');
+
 
 
 //User controllers
@@ -10,6 +12,8 @@ const Policy = require("../models/policies")
 exports.registerUser= async (req, res)=>{
     try {
         const user = await req.body;
+        const hash = await bcrypt.hash(user.password, 10)
+        user.password = hash
         const registered = await User.create(user)
         if(!registered){
              return res.status(400).json({
@@ -87,24 +91,30 @@ exports.loginUser = async (req, res)=>{
     try {
         const {email, password} = req.body
         const user = await User.findOne({email: email})
+        const passValid = await bcrypt.compare(password, user.password)
         if(!user){
              return res.status(404).json({
                 success: false,
                 message: "User not found"
             })
         }
-        if(user.password !== password){
-            // localStorage.setItem("authenticated", false)
+        if(!passValid){
             return res.status(401).json({
                 success: false,
                 message: "User not authorized"
             })
         }
-        // localStorage.setItem("authenticated", true)
         return res.status(200).json({
             success: true,
             message: "User found",
-            user
+            user: {
+                user_id: user._id.toString(),
+                username: user.username,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phoneNumber: user.phoneNumber,
+            }
         })         
     } catch (error) {
         res.status(500).json({
@@ -120,11 +130,8 @@ exports.updateUser = async (req, res)=>{
     try {
         let update = await req.body
         const newUser = await User.findByIdAndUpdate(req.params.id, {
-            title: update.title, 
-            description: update.description,
             username: update.username,
-            // email: update.email,
-            firstName: update.firstNamet,
+            firstName: update.firstName,
             lastName: update.lastName,
             phoneNumber: update.phoneNumber,
             password: update.password   
