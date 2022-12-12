@@ -8,7 +8,9 @@ const port = process.env.PORT || 3000
 const app = express()
 app.use(express.json())
 app.use("/", route)
-
+app.get("/", (req, res)=>{
+    res.send("Vulterm App API")
+})
 app.listen(port, function(){
     console.log(`app listening on port ${port}`)
 })
