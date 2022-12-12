@@ -38,10 +38,10 @@ These commands put the application in development mode and directs our applicati
 Add whatever you wished to contribute and make a pull request back to the upstream repository which will then be reviewed
 authentication or API keys. 
 
-## Booking Flight API Reference
+## Vulterms API Reference
 
 ### Getting Started
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, `http://127.0.0.1:3000/` except if another port is specified. 
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted on, `https://team-vulture2-backend.vercel.app/` 
 - Authentication: This version of the application does not require authentication or API keys. 
 
 
@@ -78,7 +78,7 @@ The API will return four error types when requests fail:
     }
     ```
     - Returns: a single new user object
-- Sample: `http://127.0.0.1:3000/users`
+- Sample: `https://team-vulture2-backend.vercel.app/users`
 ```
 {
     "success": true,
@@ -109,7 +109,7 @@ The API will return four error types when requests fail:
     }
     ```
     - Returns: verify if the user exist and if the password supplied is correct after which it returns the details of the user
-- Sample: `http://127.0.0.1:3000/login`
+- Sample: `https://team-vulture2-backend.vercel.app/login`
 ```
 {
     "success": true,
@@ -134,7 +134,7 @@ The API will return four error types when requests fail:
     - Fetches all users
     - Request Arguments: none
     - Returns: An object with details of all the userss
-- Sample: `http://127.0.0.1:3000/users`
+- Sample: `https://team-vulture2-backend.vercel.app/users`
 ```
 {
     "success": true,
@@ -186,7 +186,7 @@ The API will return four error types when requests fail:
     - Fetches a single user whose id is passed as parameter in the request url
     - Request Arguments: id of the user
     - Returns: An object with details of the user whose id was passed as parameter
-- Sample: `http://127.0.0.1:3000/users/6396283a76dcb966709f7361`
+- Sample: `https://team-vulture2-backend.vercel.app/users/6396283a76dcb966709f7361`
 ```
 {
     "success": true,
@@ -221,7 +221,7 @@ The API will return four error types when requests fail:
     }
     ```
     - Returns: status message(user updated successfully and the details of the user updated)
-- Sample: `http://127.0.0.1:3000/users/6396283a76dcb966709f7361`
+- Sample: `https://team-vulture2-backend.vercel.app/users/6396283a76dcb966709f7361`
 ```
 {
     "success": true,
@@ -246,7 +246,7 @@ The API will return four error types when requests fail:
     - Deletes a specified user using the id of the user
     - Request Arguments: id of the user 
     - Returns: deleted successfully message
-- Sample: `http://127.0.0.1:3000/users/6396283a76dcb966709f7361`
+- Sample: `https://team-vulture2-backend.vercel.app/users/6396283a76dcb966709f7361`
 ```
 {
     "success": true,
