@@ -63,7 +63,7 @@ The API will return four error types when requests fail:
 
 ### Endpoints 
 #### Users Endpoints
-##### POST /users
+#### POST /users
 - General:
     - register a new user relative to the details supllied
     - Request Body: the body will be passed as a raw json data
@@ -94,7 +94,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### GET /users
+#### GET /users
 - General:
     - Fetches all users
     - Request Arguments: none
@@ -146,7 +146,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### GET /users/:id
+#### GET /users/:id
 - General:
     - Fetches a single user whose id is passed as parameter in the request url
     - Request Arguments: id of the user
@@ -167,7 +167,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### PUT /users/:id
+#### PUT /users/:id
 - General:
     - edit/update a specified user details using the id of the user
     - Request Arguments: the http url containing the id of the user and a raw json data request body in the format below
@@ -197,7 +197,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### DELETE /users/:id
+#### DELETE /users/:id
 - General:
     - Deletes a specified user using the id of the user
     - Request Arguments: id of the user 
@@ -210,7 +210,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### POST /login
+#### POST /login
 - General:
     - login a user relative to the details supllied
     - Request Body: the body will be passed as a raw json data
@@ -237,7 +237,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### PUT /users/:id/password
+#### PUT /users/:id/password
 - General:
     - change the password of a specified user using the id of the user
     - Request Arguments: the http url containing the id of the user and a raw json data request body in the format below
@@ -256,7 +256,7 @@ The API will return four error types when requests fail:
 ```
 
 #### Privacy Policy Endpoints
-##### POST /policies
+#### POST /policies
 - General:
     - create a privacy policy relative to the details supllied
     - Request Body: the body will be passed as a raw json data
@@ -323,7 +323,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### GET /policies
+#### GET /policies
 - General:
     - Fetches all privacy policies
     - Request Arguments: none
@@ -433,7 +433,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### GET /policies/:id
+#### GET /policies/:id
 - General:
     - Fetches a single privacy policy whose id is passed as parameter in the request url
     - Request Arguments: id of the privacy policy
@@ -480,7 +480,7 @@ The API will return four error types when requests fail:
 ```
 
 #### Terms and Conditions Endpoints
-##### POST /terms
+#### POST /terms
 - General:
     - create a policy relative to the details supllied
     - Request Body: the body will be passed as a raw json data
@@ -522,7 +522,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### GET /terms
+#### GET /terms
 - General:
     - Fetches all terms and conditions
     - Request Arguments: none
@@ -570,7 +570,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-##### GET /terms/:id
+#### GET /terms/:id
 - General:
     - Fetches a single terms and conditions whose id is passed as parameter in the request url
     - Request Arguments: id of the terms and conditions
