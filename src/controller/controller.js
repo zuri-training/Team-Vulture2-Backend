@@ -1,7 +1,6 @@
 const User = require("../models/user")
 const UserFile = require("../models/userFile")
 const Term = require("../models/terms")
-const Condition = require("../models/conditions")
 const Policy = require("../models/policies")
 const bcrypt = require('bcryptjs');
 
