@@ -41,7 +41,7 @@ authentication or API keys.
 ## Vulterms API Reference
 
 ### Getting Started
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted on, `https://team-vulture2-backend.vercel.app/` 
+- Base URL: At present, the backend app is hosted on `https://team-vulture2-backend.vercel.app/` 
 - Authentication: This version of the application does not require authentication or API keys. 
 
 
