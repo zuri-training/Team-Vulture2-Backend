@@ -338,7 +338,7 @@ The API will return four error types when requests fail:
             "_id": "6398489ee6c16eb7acdbbfbb",
             "name": "Sample Website Policy",
             "user_id": "63962a19683eedcd74dcede0",
-            "policyData": {
+            "data": {
                 "where": [
                     "website",
                     "app"
@@ -366,7 +366,7 @@ The API will return four error types when requests fail:
             "_id": "63984f2b602ac0326d22e260",
             "name": "Sample Website Two Policy",
             "user_id": "63962a19683eedcd74dcede0",
-            "policyData": {
+            "data": {
                 "where": [
                     "website"
                 ],
@@ -480,7 +480,7 @@ The API will return four error types when requests fail:
 ```
 
 #### Terms and Conditions Endpoints
-##### POST /policies
+##### POST /terms
 - General:
     - create a policy relative to the details supllied
     - Request Body: the body will be passed as a raw json data
