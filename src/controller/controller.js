@@ -3,7 +3,7 @@ const UserFile = require("../models/userFile")
 const Term = require("../models/terms")
 const Condition = require("../models/conditions")
 const Policy = require("../models/policies")
-const bcryptjs = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 
 
@@ -12,7 +12,7 @@ const bcryptjs = require('bcryptjs');
 exports.registerUser= async (req, res)=>{
     try {
         const user = await req.body;
-        const hash = await bcryptjs.hash(user.password, 10)
+        const hash = await bcrypt.hash(user.password, 10)
         user.password = hash
         const registered = await User.create(user)
         if(!registered){
@@ -105,7 +105,7 @@ exports.loginUser = async (req, res)=>{
     try {
         const {email, password} = req.body
         const user = await User.findOne({email: email})
-        const passValid = await bcryptjs.compare(password, user.password)
+        const passValid = await bcrypt.compare(password, user.password)
         if(!user){
              return res.status(404).json({
                 success: false,
@@ -180,7 +180,7 @@ exports.updateUser = async (req, res)=>{
 exports.changePassword = async (req, res)=>{
     try {
         let newPassword = await req.body
-        const hash = await bcryptjs.hash(newPassword.password, 10)
+        const hash = await bcrypt.hash(newPassword.password, 10)
         const newUser = await User.findByIdAndUpdate(req.params.id, {password: hash})
         if(!newUser){
              return res.status(404).json({
@@ -214,6 +214,158 @@ exports.deleteUser = async (req, res)=>{
         return res.status(200).json({
             success: true,
             message: "User deleted successfully"
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//Policy controller
+//create policy
+exports.addPolicy= async (req, res)=>{
+    try {
+        const policy = await req.body
+        const newPolicy = await Policy.create(policy)
+        if(!newPolicy){
+             return res.status(400).json({
+                success: false,
+                message: "Policy creation failed"
+            })
+        }
+        return res.status(201).json({
+            success: true,
+            message: "new policy successfully created",
+            newPolicy
+            })        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//get all policies
+exports.getAllPolicies = async (req, res)=>{
+    try {
+        const policies = await Policy.find({})
+        if(!policies.length === 0){
+             return res.status(404).json({
+                success: false,
+                message: "no policy was found"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Policies found",
+            policies: policies,
+            total: policies.length
+        })        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+
+//get single policy
+exports.getPolicy = async (req, res)=>{
+    try {
+        const policy = await Policy.findById(req.params.id)
+        if(!policy){
+             return res.status(404).json({
+                success: false,
+                message: "Policy not found"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Policy found",
+            policy
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//Policy controller
+//create policy
+exports.addTerm= async (req, res)=>{
+    try {
+        const term = await req.body
+        const newTerm = await Term.create(term)
+        if(!newTerm){
+             return res.status(400).json({
+                success: false,
+                message: "Terms and Conditions creation failed"
+            })
+        }
+        return res.status(201).json({
+            success: true,
+            message: "New terms and conditions successfully created",
+            newTerm
+            })        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//get all policies
+exports.getAllTerms = async (req, res)=>{
+    try {
+        const terms = await Term.find({})
+        if(!terms.length === 0){
+             return res.status(404).json({
+                success: false,
+                message: "no terms and conditiond was found"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Terms and Condditions found",
+            terms: terms,
+            total: terms.length
+        })        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+
+//get single policy
+exports.getTerm = async (req, res)=>{
+    try {
+        const term = await Term.findById(req.params.id)
+        if(!term){
+             return res.status(404).json({
+                success: false,
+                message: "Terms and Conditions not found"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Terms and Conditions found",
+            term
         })         
     } catch (error) {
         res.status(500).json({

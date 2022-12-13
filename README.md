@@ -62,11 +62,11 @@ The API will return four error types when requests fail:
 - 500: Server error 
 
 ### Endpoints 
-
-#### POST /users
+#### Users Endpoints
+##### POST /users
 - General:
     - register a new user relative to the details supllied
-    - Request Body: the body will be passed as a rawjson data
+    - Request Body: the body will be passed as a raw json data
     ```
     {
         "username": "User1",
@@ -84,56 +84,21 @@ The API will return four error types when requests fail:
     "success": true,
     "message": "new user registered",
     "user": {
+        "user_id": "63962a19683eedcd74dcede0"
         "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
         "phoneNumber": "08034352725",
-        "password": "user1password",
-        "_id": "63962a19683eedcd74dcede0",
-        "createdAt": "2022-12-11T19:06:01.467Z",
-        "updatedAt": "2022-12-11T19:06:01.467Z",
-        "__v": 0
     }
 }
 ```
 
-#### POST /login
-- General:
-    - login a user relative to the details supllied
-    - Request Body: the body will be passed as a rawjson data
-    ```
-    {
-        "email": "user1e@mail.com",
-        "password": "newuser1password"
-    }
-    ```
-    - Returns: verify if the user exist and if the password supplied is correct after which it returns the details of the user
-- Sample: `https://team-vulture2-backend.vercel.app/login`
-```
-{
-    "success": true,
-    "message": "User found",
-    "user": {
-        "_id": "63962c1a683eedcd74dcede7",
-        "username": "User1",
-        "email": "user1e@mail.com",
-        "firstName": "New",
-        "lastName": "User",
-        "phoneNumber": "08034352725",
-        "password": "newuser1password",
-        "createdAt": "2022-12-11T19:14:34.327Z",
-        "updatedAt": "2022-12-11T19:14:34.327Z",
-        "__v": 0
-    }
-}
-```
-
-#### GET /users
+##### GET /users
 - General:
     - Fetches all users
     - Request Arguments: none
-    - Returns: An object with details of all the userss
+    - Returns: An object with details of all the users
 - Sample: `https://team-vulture2-backend.vercel.app/users`
 ```
 {
@@ -181,7 +146,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-#### GET /users/:id
+##### GET /users/:id
 - General:
     - Fetches a single user whose id is passed as parameter in the request url
     - Request Arguments: id of the user
@@ -192,21 +157,17 @@ The API will return four error types when requests fail:
     "success": true,
     "message": "User found",
     "user": {
-        "_id": "6396283a76dcb966709f7361",
+        "user_id": "6396283a76dcb966709f7361",
         "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
-        "phoneNumber": "08034352725",
-        "password": "user1password",
-        "createdAt": "2022-12-11T18:58:02.890Z",
-        "updatedAt": "2022-12-11T18:58:02.890Z",
-        "__v": 0
+        "phoneNumber": "08034352725"
     }
 }
 ```
 
-#### PUT /users/:id
+##### PUT /users/:id
 - General:
     - edit/update a specified user details using the id of the user
     - Request Arguments: the http url containing the id of the user and a raw json data request body in the format below
@@ -216,8 +177,7 @@ The API will return four error types when requests fail:
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
-        "phoneNumber": "08034352725",
-        "password": "newuser1password"
+        "phoneNumber": "08034352725"
     }
     ```
     - Returns: status message(user updated successfully and the details of the user updated)
@@ -232,16 +192,12 @@ The API will return four error types when requests fail:
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
-        "phoneNumber": "08034352725",
-        "password": "newuser1password",
-        "createdAt": "2022-12-11T18:58:02.890Z",
-        "updatedAt": "2022-12-11T19:11:29.631Z",
-        "__v": 0
+        "phoneNumber": "08034352725"
     }
 }
 ```
 
-#### DELETE /users/:id
+##### DELETE /users/:id
 - General:
     - Deletes a specified user using the id of the user
     - Request Arguments: id of the user 
@@ -254,3 +210,391 @@ The API will return four error types when requests fail:
 }
 ```
 
+##### POST /login
+- General:
+    - login a user relative to the details supllied
+    - Request Body: the body will be passed as a raw json data
+    ```
+    {
+        "email": "user1e@mail.com",
+        "password": "newuser1password"
+    }
+    ```
+    - Returns: verify if the user exist and if the password supplied is correct after which it returns the details of the user
+- Sample: `https://team-vulture2-backend.vercel.app/login`
+```
+{
+    "success": true,
+    "message": "User found",
+    "user": {
+        "user_id": "63962c1a683eedcd74dcede7",
+        "username": "User1",
+        "email": "user1e@mail.com",
+        "firstName": "New",
+        "lastName": "User",
+        "phoneNumber": "08034352725"
+    }
+}
+```
+
+##### PUT /users/:id/password
+- General:
+    - change the password of a specified user using the id of the user
+    - Request Arguments: the http url containing the id of the user and a raw json data request body in the format below
+    ```
+    {
+        "password": "newuser1password"
+    }
+    ```
+    - Returns: status message(Password changed successfully)
+- Sample: `https://team-vulture2-backend.vercel.app/users/6396283a76dcb966709f7361/password`
+```
+{
+    "success": true,
+    "message": "Password changed successfully"
+}
+```
+
+#### Privacy Policy Endpoints
+##### POST /policies
+- General:
+    - create a privacy policy relative to the details supllied
+    - Request Body: the body will be passed as a raw json data
+    ```
+    {
+        "name": "Sample Website Policy",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+                "where": ["website"],
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "informationType": ["email", "full name", "address", "social media", "others"],
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                }
+        }  
+    }
+    ```
+    - Returns: a single new privacy policy object
+- Sample: `https://team-vulture2-backend.vercel.app/policies`
+```
+{
+    "success": true,
+    "message": "new policy successfully created",
+    "newPolicy": {
+        "name": "Sample Website  Policy",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+            "where": [
+                "website"
+            ],
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsite.com",
+                "websiteName": "Sample website",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "informationType": [
+                "email",
+                "full name",
+                "address",
+                "social media",
+                "others"
+            ],
+            "contact": {
+                "email": "contact@samplewebsite.com",
+                "phoneNumber": "08134263292",
+                "webPage": "https://www.samplewebsite.com/contact.html"
+            },
+            "_id": "63985aa11711b81b1044ffc1"
+        },
+        "policyType": "NDPR",
+        "_id": "63985aa11711b81b1044ffc0",
+        "createdAt": "2022-12-13T10:57:37.212Z",
+        "updatedAt": "2022-12-13T10:57:37.212Z",
+        "__v": 0
+    }
+}
+```
+
+##### GET /policies
+- General:
+    - Fetches all privacy policies
+    - Request Arguments: none
+    - Returns: An object with details of all the privacy policies
+- Sample: `https://team-vulture2-backend.vercel.app/policies`
+```
+{
+    "success": true,
+    "message": "Policies found",
+    "policies": [
+        {
+            "_id": "6398489ee6c16eb7acdbbfbb",
+            "name": "Sample Website Policy",
+            "user_id": "63962a19683eedcd74dcede0",
+            "policyData": {
+                "where": [
+                    "website",
+                    "app"
+                ],
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "informationType": [],
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08043256645",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "_id": "6398489ee6c16eb7acdbbfbc"
+            },
+            "policyType": "NDPR",
+            "createdAt": "2022-12-13T09:40:46.963Z",
+            "updatedAt": "2022-12-13T09:40:46.963Z",
+            "__v": 0
+        },
+        {
+            "_id": "63984f2b602ac0326d22e260",
+            "name": "Sample Website Two Policy",
+            "user_id": "63962a19683eedcd74dcede0",
+            "policyData": {
+                "where": [
+                    "website"
+                ],
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsitetwo.com",
+                    "websiteName": "Sample website Two",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "informationType": [
+                    "email",
+                    "full name",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "contact": {
+                    "email": "contact@samplewebsitetwi.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsitetwo.com/contact.html"
+                },
+                "_id": "63984f2b602ac0326d22e261"
+            },
+            "policyType": "NDPR",
+            "createdAt": "2022-12-13T10:08:43.115Z",
+            "updatedAt": "2022-12-13T10:08:43.115Z",
+            "__v": 0
+        },
+        {
+            "_id": "63985aa11711b81b1044ffc0",
+            "name": "Sample Website  Policy",
+            "user_id": "63962a19683eedcd74dcede0",
+            "data": {
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "full name",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "_id": "63985aa11711b81b1044ffc1"
+            },
+            "policyType": "NDPR",
+            "createdAt": "2022-12-13T10:57:37.212Z",
+            "updatedAt": "2022-12-13T10:57:37.212Z",
+            "__v": 0
+        }
+    ],
+    "total": 3
+}
+```
+
+##### GET /policies/:id
+- General:
+    - Fetches a single privacy policy whose id is passed as parameter in the request url
+    - Request Arguments: id of the privacy policy
+    - Returns: An object with details of the privacy policy whose id was passed as parameter
+- Sample: `https://team-vulture2-backend.vercel.app/users/6396283a76dcb966709f7361`
+```
+{
+    "success": true,
+    "message": "Policy found",
+    "policy": {
+        "_id": "63985aa11711b81b1044ffc0",
+        "name": "Sample Website  Policy",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsite.com",
+                "websiteName": "Sample website",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "contact": {
+                "email": "contact@samplewebsite.com",
+                "phoneNumber": "08134263292",
+                "webPage": "https://www.samplewebsite.com/contact.html"
+            },
+            "where": [
+                "website"
+            ],
+            "informationType": [
+                "email",
+                "full name",
+                "address",
+                "social media",
+                "others"
+            ],
+            "_id": "63985aa11711b81b1044ffc1"
+        },
+        "policyType": "NDPR",
+        "createdAt": "2022-12-13T10:57:37.212Z",
+        "updatedAt": "2022-12-13T10:57:37.212Z",
+        "__v": 0
+    }
+}
+```
+
+#### Terms and Conditions Endpoints
+##### POST /policies
+- General:
+    - create a policy relative to the details supllied
+    - Request Body: the body will be passed as a raw json data
+    ```
+    {
+        "name": "Sample Website  Terms and Conditions",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+                    "websiteUrl": "https://www.samplewebsitetwo.com",
+                    "websiteName": "Sample website",
+                    "country": "Nigeria",
+                    "entityType": "business",
+                    "email": "support@samplewebsite.com"
+        }  
+    }
+    ```
+    - Returns: a single new terms and constions object
+- Sample: `https://team-vulture2-backend.vercel.app/terms`
+```
+{
+    "success": true,
+    "message": "New terms and conditions successfully created",
+    "newTerm": {
+        "name": "Sample Website Terms and Conditions",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+            "websiteName": "Sample website",
+            "websiteUrl": "https://www.samplewebsite.com",
+            "country": "Nigeria",
+            "email": "support@samplewebsite.com",
+            "entityType": "business",
+            "_id": "639860181711b81b1044ffd3"
+        },
+        "_id": "639860181711b81b1044ffd2",
+        "createdAt": "2022-12-13T11:20:56.245Z",
+        "updatedAt": "2022-12-13T11:20:56.245Z",
+        "__v": 0
+    }
+}
+```
+
+##### GET /terms
+- General:
+    - Fetches all terms and conditions
+    - Request Arguments: none
+    - Returns: An object with details of all the terms and conditions
+- Sample: `https://team-vulture2-backend.vercel.app/terms`
+```
+{
+    "success": true,
+    "message": "Terms and Condditions found",
+    "terms": [
+        {
+            "_id": "639860181711b81b1044ffd2",
+            "name": "Sample Website Terms and Conditions",
+            "user_id": "63962a19683eedcd74dcede0",
+            "data": {
+                "websiteName": "Sample website",
+                "websiteUrl": "https://www.samplewebsite.com",
+                "country": "Nigeria",
+                "email": "support@samplewebsite.com",
+                "entityType": "business",
+                "_id": "639860181711b81b1044ffd3"
+            },
+            "createdAt": "2022-12-13T11:20:56.245Z",
+            "updatedAt": "2022-12-13T11:20:56.245Z",
+            "__v": 0
+        },
+        {
+            "_id": "639860761711b81b1044ffd6",
+            "name": "Sample Website Two Terms and Conditions",
+            "user_id": "63962a19683eedcd74dcede0",
+            "data": {
+                "websiteName": "Sample website Two",
+                "websiteUrl": "https://www.samplewebsitetwo.com",
+                "country": "Nigeria",
+                "email": "support@samplewebsitetwo.com",
+                "entityType": "business",
+                "_id": "639860761711b81b1044ffd7"
+            },
+            "createdAt": "2022-12-13T11:22:30.264Z",
+            "updatedAt": "2022-12-13T11:22:30.264Z",
+            "__v": 0
+        }
+    ],
+    "total": 2
+}
+```
+
+##### GET /terms/:id
+- General:
+    - Fetches a single terms and conditions whose id is passed as parameter in the request url
+    - Request Arguments: id of the terms and conditions
+    - Returns: An object with details of the terms and conditions whose id was passed as parameter
+- Sample: `https://team-vulture2-backend.vercel.app/terms/639860181711b81b1044ffd2`
+```
+{
+    "success": true,
+    "message": "Terms and Conditions found",
+    "term": {
+        "_id": "639860181711b81b1044ffd2",
+        "name": "Sample Website Terms and Conditions",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+            "websiteName": "Sample website",
+            "websiteUrl": "https://www.samplewebsite.com",
+            "country": "Nigeria",
+            "email": "support@samplewebsite.com",
+            "entityType": "business",
+            "_id": "639860181711b81b1044ffd3"
+        },
+        "createdAt": "2022-12-13T11:20:56.245Z",
+        "updatedAt": "2022-12-13T11:20:56.245Z",
+        "__v": 0
+    }
+}
+```
