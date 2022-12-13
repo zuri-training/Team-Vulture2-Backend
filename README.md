@@ -255,6 +255,8 @@ The API will return four error types when requests fail:
 }
 ```
 
+
+
 #### Privacy Policy Endpoints
 #### POST /policies
 - General:
@@ -438,7 +440,7 @@ The API will return four error types when requests fail:
     - Fetches a single privacy policy whose id is passed as parameter in the request url
     - Request Arguments: id of the privacy policy
     - Returns: An object with details of the privacy policy whose id was passed as parameter
-- Sample: `https://team-vulture2-backend.vercel.app/users/6396283a76dcb966709f7361`
+- Sample: `https://team-vulture2-backend.vercel.app/policies/6396283a76dcb966709f7361`
 ```
 {
     "success": true,
@@ -478,6 +480,8 @@ The API will return four error types when requests fail:
     }
 }
 ```
+
+
 
 #### Terms and Conditions Endpoints
 #### POST /terms
