@@ -325,7 +325,7 @@ The API will return four error types when requests fail:
 ```
 {
     "success": true,
-    "message": "Policies found",
+    "message": "Privacy Policies found",
     "policies": [
         {
             "_id": "6398489ee6c16eb7acdbbfbb",
@@ -431,11 +431,11 @@ The API will return four error types when requests fail:
     - Fetches a single privacy policy whose id is passed as parameter in the request url
     - Request Arguments: id of the privacy policy
     - Returns: An object with details of the privacy policy whose id was passed as parameter
-- Sample: `https://team-vulture2-backend.vercel.app/policies/6396283a76dcb966709f7361`
+- Sample: `https://team-vulture2-backend.vercel.app/policies/63985aa11711b81b1044ffc0`
 ```
 {
     "success": true,
-    "message": "Policy found",
+    "message": "Privacy Policy found",
     "policy": {
         "_id": "63985aa11711b81b1044ffc0",
         "name": "Sample Website  Policy",
@@ -469,6 +469,93 @@ The API will return four error types when requests fail:
         "updatedAt": "2022-12-13T10:57:37.212Z",
         "__v": 0
     }
+}
+```
+
+#### PUT /policies/:id
+- General:
+    - edit/update a specified privacy policy details using the id of the privacy policy
+    - Request Arguments: the http url containing the id of the privacy policy and a raw json data request body in the format below
+    ```
+    {
+        "name": "Sample Website  Policy",
+        "data": {
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsite.com",
+                "websiteName": "Sample website",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "contact": {
+                "email": "contact@samplewebsite.com",
+                "phoneNumber": "08134263292",
+                "webPage": "https://www.samplewebsite.com/contact.html"
+            },
+            "where": [
+                "website"
+            ],
+            "informationType": [
+                "email",
+                "full name",
+                "address",
+                "social media",
+                "others"
+            ]
+        }
+    }
+    ```
+    - Returns: status message(privacy policy updated successfully and the details of the privacy policy updated)
+- Sample: `https://team-vulture2-backend.vercel.app/policies/63985aa11711b81b1044ffc0`
+```
+{
+    "success": true,
+    "message": "Privacy Policy updated successfully",
+    "newPolicy": {
+        "_id": "63985aa11711b81b1044ffc0",
+        "name": "Sample Website  Policy",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsite.com",
+                "websiteName": "Sample website",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "contact": {
+                "email": "contact@samplewebsite.com",
+                "phoneNumber": "08134263292",
+                "webPage": "https://www.samplewebsite.com/contact.html"
+            },
+            "where": [
+                "website"
+            ],
+            "informationType": [
+                "email",
+                "full name",
+                "address",
+                "social media",
+                "others"
+            ],
+            "_id": "63985aa11711b81b1044ffc1"
+        },
+        "policyType": "NDPR",
+        "createdAt": "2022-12-13T10:57:37.212Z",
+        "updatedAt": "2022-12-13T10:57:37.212Z",
+        "__v": 0
+    }
+}
+```
+
+#### DELETE policies/:id
+- General:
+    - Deletes a specified privacy policy using the id of the privacy policy
+    - Request Arguments: id of the privacy policy 
+    - Returns: deleted successfully message
+- Sample: `https://team-vulture2-backend.vercel.app/policies/63985aa11711b81b1044ffc0`
+```
+{
+    "success": true,
+    "message": "Privacy Policy deleted successfully"
 }
 ```
 
@@ -582,7 +669,7 @@ The API will return four error types when requests fail:
                 ],
                 "_id": "639a0cb3ad698ff32a00f7d5"
             },
-            "policyType": "NDPR",
+            "termType": "NDPR",
             "createdAt": "2022-12-14T17:49:39.276Z",
             "updatedAt": "2022-12-14T17:49:39.276Z",
             "__v": 0
@@ -613,7 +700,7 @@ The API will return four error types when requests fail:
                 ],
                 "_id": "639a0d2cad698ff32a00f7d8"
             },
-            "policyType": "NDPR",
+            "termType": "NDPR",
             "createdAt": "2022-12-14T17:51:40.530Z",
             "updatedAt": "2022-12-14T17:51:40.530Z",
             "__v": 0
@@ -661,10 +748,87 @@ The API will return four error types when requests fail:
             ],
             "_id": "639a0cb3ad698ff32a00f7d5"
         },
-        "policyType": "NDPR",
+        "termType": "NDPR",
         "createdAt": "2022-12-14T17:49:39.276Z",
         "updatedAt": "2022-12-14T17:49:39.276Z",
         "__v": 0
     }
+}
+```
+
+#### PUT /terms/:id
+- General:
+    - edit/update a specified terms and conditions details using the id of the terms and conditions
+    - Request Arguments: the http url containing the id of the terms and conditions and a raw json data request body in the format below
+    ```
+    {
+        "name": "Sample Website Two Terms and Conditions",
+        "data": {
+                "where": ["website"],
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsitetwo.com",
+                    "websiteName": "Sample website 2",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "informationType": ["email", "social media", "others"],
+                "contact": {
+                    "email": "support@samplewebsitetwo.com",
+                    "phoneNumber": "08133425292",
+                    "webPage": "https://www.samplewebsite.com/help"
+                }
+        }  
+    }
+    ```
+    - Returns: status message(terms and conditions updated successfully and the details of the terms and conditions updated)
+- Sample: `https://team-vulture2-backend.vercel.app/terms/639a0d2cad698ff32a00f7d7`
+```
+{
+    "success": true,
+    "message": "Terms and Conditions updated successfully",
+    "newTerm": {
+        "_id": "639a0d2cad698ff32a00f7d7",
+        "name": "Sample Website Two Terms and Conditions",
+        "user_id": "63962a19683eedcd74dcede0",
+        "data": {
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsitetwo.com",
+                "websiteName": "Sample website 2",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "contact": {
+                "email": "support@samplewebsitetwo.com",
+                "phoneNumber": "08133425292",
+                "webPage": "https://www.samplewebsite.com/help"
+            },
+            "where": [
+                "website"
+            ],
+            "informationType": [
+                "email",
+                "social media",
+                "others"
+            ],
+            "_id": "639a2aa0fda59d3d5f4517fb"
+        },
+         "termType": "NDPR",
+        "createdAt": "2022-12-14T17:51:40.530Z",
+        "updatedAt": "2022-12-14T19:57:20.052Z",
+        "__v": 0
+    }
+}
+```
+
+#### DELETE terms/:id
+- General:
+    - Deletes a specified terms and conditions using the id of the terms and conditions
+    - Request Arguments: id of the terms and conditions 
+    - Returns: deleted successfully message
+- Sample: `https://team-vulture2-backend.vercel.app/terms/639a0d2cad698ff32a00f7d7`
+```
+{
+    "success": true,
+    "message": "Terms and Conditions deleted successfully"
 }
 ```
