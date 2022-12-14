@@ -41,7 +41,7 @@ authentication or API keys.
 ## Vulterms API Reference
 
 ### Getting Started
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted on, `https://team-vulture2-backend.vercel.app/` 
+- Base URL: At present, the backend app is hosted on `https://team-vulture2-backend.vercel.app/` 
 - Authentication: This version of the application does not require authentication or API keys. 
 
 
@@ -63,7 +63,7 @@ The API will return four error types when requests fail:
 
 ### Endpoints 
 #### Users Endpoints
-#### POST /users
+#### POST /users/register
 - General:
     - register a new user relative to the details supllied
     - Request Body: the body will be passed as a raw json data
@@ -106,39 +106,39 @@ The API will return four error types when requests fail:
     "message": "Users found",
     "users": [
         {
-            "_id": "6396280076dcb966709f735f",
+            "_id": "639856d4d7dee48e6da86635",
+            "username": "User",
+            "email": "user@mail.com",
+            "firstName": "New",
+            "lastName": "User",
+            "phoneNumber": "08034352725",
+            "password": "$2a$10$YCeX9CdpNA3XUQ2UAqzVHOJdwpv7MHeHgwGojn0lhOTtcOM.qHfE.",
+            "createdAt": "2022-12-13T10:41:24.118Z",
+            "updatedAt": "2022-12-13T10:41:24.118Z",
+            "__v": 0
+        },
+        {
+            "_id": "6398e4ecb03eedcb216e2d37",
             "username": "Tolulophey",
             "email": "sample@mail.com",
             "firstName": "Tolulope",
             "lastName": "Amole",
             "phoneNumber": "08063673201",
-            "password": "12345",
-            "createdAt": "2022-12-11T18:57:04.126Z",
-            "updatedAt": "2022-12-11T18:57:04.126Z",
+            "password": "$2a$10$JFDDCsqWfKuKD3JAoAqxHu.heYWn7vf1YxBbzQKa5Zub5nm/EeQ4.",
+            "createdAt": "2022-12-13T20:47:40.960Z",
+            "updatedAt": "2022-12-13T20:47:40.960Z",
             "__v": 0
         },
         {
-            "_id": "6396283a76dcb966709f7361",
-            "username": "User1",
-            "email": "user1e@mail.com",
-            "firstName": "New",
-            "lastName": "User",
-            "phoneNumber": "08034352725",
-            "password": "user1password",
-            "createdAt": "2022-12-11T18:58:02.890Z",
-            "updatedAt": "2022-12-11T18:58:02.890Z",
-            "__v": 0
-        },
-        {
-            "_id": "63962a19683eedcd74dcede0",
+            "_id": "6398e516b03eedcb216e2d3b",
             "username": "User2",
-            "email": "user2e@mail.com",
+            "email": "user2@mail.com",
             "firstName": "New",
             "lastName": "User",
             "phoneNumber": "08034352725",
-            "password": "user2password",
-            "createdAt": "2022-12-11T19:06:01.467Z",
-            "updatedAt": "2022-12-11T19:06:01.467Z",
+            "password": "$2a$10$RwEVJyPgpoRFG6FG3DXkXuBChX6dlWKBitJngtEN82QV3cJbCP4Q2",
+            "createdAt": "2022-12-13T20:48:22.087Z",
+            "updatedAt": "2022-12-13T20:48:22.087Z",
             "__v": 0
         }
     ],
@@ -210,7 +210,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-#### POST /login
+#### POST users/login
 - General:
     - login a user relative to the details supllied
     - Request Body: the body will be passed as a raw json data
@@ -483,6 +483,7 @@ The API will return four error types when requests fail:
 
 
 
+
 #### Terms and Conditions Endpoints
 #### POST /terms
 - General:
@@ -490,14 +491,22 @@ The API will return four error types when requests fail:
     - Request Body: the body will be passed as a raw json data
     ```
     {
-        "name": "Sample Website  Terms and Conditions",
+        "name": "Sample Website Terms and Conditions",
         "user_id": "63962a19683eedcd74dcede0",
         "data": {
-                    "websiteUrl": "https://www.samplewebsitetwo.com",
+                "where": ["website"],
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
                     "websiteName": "Sample website",
-                    "country": "Nigeria",
                     "entityType": "business",
-                    "email": "support@samplewebsite.com"
+                    "country": "Nigeria"
+                },
+                "informationType": ["email", "full name", "address", "social media", "others"],
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                }
         }  
     }
     ```
@@ -511,16 +520,33 @@ The API will return four error types when requests fail:
         "name": "Sample Website Terms and Conditions",
         "user_id": "63962a19683eedcd74dcede0",
         "data": {
-            "websiteName": "Sample website",
-            "websiteUrl": "https://www.samplewebsite.com",
-            "country": "Nigeria",
-            "email": "support@samplewebsite.com",
-            "entityType": "business",
-            "_id": "639860181711b81b1044ffd3"
+            "where": [
+                "website"
+            ],
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsite.com",
+                "websiteName": "Sample website",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "informationType": [
+                "email",
+                "full name",
+                "address",
+                "social media",
+                "others"
+            ],
+            "contact": {
+                "email": "contact@samplewebsite.com",
+                "phoneNumber": "08134263292",
+                "webPage": "https://www.samplewebsite.com/contact.html"
+            },
+            "_id": "639a0cb3ad698ff32a00f7d5"
         },
-        "_id": "639860181711b81b1044ffd2",
-        "createdAt": "2022-12-13T11:20:56.245Z",
-        "updatedAt": "2022-12-13T11:20:56.245Z",
+        "policyType": "NDPR",
+        "_id": "639a0cb3ad698ff32a00f7d4",
+        "createdAt": "2022-12-14T17:49:39.276Z",
+        "updatedAt": "2022-12-14T17:49:39.276Z",
         "__v": 0
     }
 }
@@ -538,35 +564,67 @@ The API will return four error types when requests fail:
     "message": "Terms and Condditions found",
     "terms": [
         {
-            "_id": "639860181711b81b1044ffd2",
+            "_id": "639a0cb3ad698ff32a00f7d4",
             "name": "Sample Website Terms and Conditions",
             "user_id": "63962a19683eedcd74dcede0",
             "data": {
-                "websiteName": "Sample website",
-                "websiteUrl": "https://www.samplewebsite.com",
-                "country": "Nigeria",
-                "email": "support@samplewebsite.com",
-                "entityType": "business",
-                "_id": "639860181711b81b1044ffd3"
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "full name",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "_id": "639a0cb3ad698ff32a00f7d5"
             },
-            "createdAt": "2022-12-13T11:20:56.245Z",
-            "updatedAt": "2022-12-13T11:20:56.245Z",
+            "policyType": "NDPR",
+            "createdAt": "2022-12-14T17:49:39.276Z",
+            "updatedAt": "2022-12-14T17:49:39.276Z",
             "__v": 0
         },
         {
-            "_id": "639860761711b81b1044ffd6",
+            "_id": "639a0d2cad698ff32a00f7d7",
             "name": "Sample Website Two Terms and Conditions",
             "user_id": "63962a19683eedcd74dcede0",
             "data": {
-                "websiteName": "Sample website Two",
-                "websiteUrl": "https://www.samplewebsitetwo.com",
-                "country": "Nigeria",
-                "email": "support@samplewebsitetwo.com",
-                "entityType": "business",
-                "_id": "639860761711b81b1044ffd7"
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsitetwo.com",
+                    "websiteName": "Sample website Two",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "support@samplewebsitetwo.com",
+                    "phoneNumber": "08133425292",
+                    "webPage": "https://www.samplewebsite.com/help"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "social media",
+                    "others"
+                ],
+                "_id": "639a0d2cad698ff32a00f7d8"
             },
-            "createdAt": "2022-12-13T11:22:30.264Z",
-            "updatedAt": "2022-12-13T11:22:30.264Z",
+            "policyType": "NDPR",
+            "createdAt": "2022-12-14T17:51:40.530Z",
+            "updatedAt": "2022-12-14T17:51:40.530Z",
             "__v": 0
         }
     ],
@@ -579,25 +637,42 @@ The API will return four error types when requests fail:
     - Fetches a single terms and conditions whose id is passed as parameter in the request url
     - Request Arguments: id of the terms and conditions
     - Returns: An object with details of the terms and conditions whose id was passed as parameter
-- Sample: `https://team-vulture2-backend.vercel.app/terms/639860181711b81b1044ffd2`
+- Sample: `https://team-vulture2-backend.vercel.app/terms/639a0cb3ad698ff32a00f7d4`
 ```
 {
     "success": true,
     "message": "Terms and Conditions found",
     "term": {
-        "_id": "639860181711b81b1044ffd2",
+        "_id": "639a0cb3ad698ff32a00f7d4",
         "name": "Sample Website Terms and Conditions",
         "user_id": "63962a19683eedcd74dcede0",
         "data": {
-            "websiteName": "Sample website",
-            "websiteUrl": "https://www.samplewebsite.com",
-            "country": "Nigeria",
-            "email": "support@samplewebsite.com",
-            "entityType": "business",
-            "_id": "639860181711b81b1044ffd3"
+            "whereDetails": {
+                "websiteUrl": "https://www.samplewebsite.com",
+                "websiteName": "Sample website",
+                "entityType": "business",
+                "country": "Nigeria"
+            },
+            "contact": {
+                "email": "contact@samplewebsite.com",
+                "phoneNumber": "08134263292",
+                "webPage": "https://www.samplewebsite.com/contact.html"
+            },
+            "where": [
+                "website"
+            ],
+            "informationType": [
+                "email",
+                "full name",
+                "address",
+                "social media",
+                "others"
+            ],
+            "_id": "639a0cb3ad698ff32a00f7d5"
         },
-        "createdAt": "2022-12-13T11:20:56.245Z",
-        "updatedAt": "2022-12-13T11:20:56.245Z",
+        "policyType": "NDPR",
+        "createdAt": "2022-12-14T17:49:39.276Z",
+        "updatedAt": "2022-12-14T17:49:39.276Z",
         "__v": 0
     }
 }

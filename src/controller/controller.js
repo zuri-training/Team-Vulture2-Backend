@@ -20,6 +20,7 @@ exports.registerUser= async (req, res)=>{
                 message: "User registration failed"
             })
         }
+        // req.flash('info', 'Registration successful');
         return res.status(201).json({
             success: true,
             message: "new user registered",
@@ -117,6 +118,7 @@ exports.loginUser = async (req, res)=>{
                 message: "User not authorized"
             })
         }
+        // req.flash('info', 'login Sucessful');
         return res.status(200).json({
             success: true,
             message: "User found",
