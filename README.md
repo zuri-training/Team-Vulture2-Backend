@@ -808,7 +808,7 @@ The API will return four error types when requests fail:
     - Fetches all terms and conditions that had been generated so far by the user whose id is passed as parameter in the request url
     - Request Arguments: id of the user whose all terms and conditions want to be fetched
     - Returns: An object with details of all the terms and conditions associated with the id that was passed as parameter
-- Sample: `https://team-vulture2-backend.vercel.app/policies/terms/639856d4d7dee48e6da86635`
+- Sample: `https://team-vulture2-backend.vercel.app/terms/639856d4d7dee48e6da86635`
 ```
 {
     "success": true,
@@ -1000,7 +1000,7 @@ The API will return four error types when requests fail:
     - Deletes all the terms and conditions using associated tpo the user whose the id was specified
      - Request Arguments: id of a user whose all terms and conditions are to be deleted 
     - Returns: deleted successfully message containing the name of the user whose terms and conditions were deleted
-- Sample: `https://team-vulture2-backend.vercel.app/terms/639856d4d7dee48e6da86635`
+- Sample: `https://team-vulture2-backend.vercel.app/terms/users/639856d4d7dee48e6da86635`
 ```
 {
     "success": true,
