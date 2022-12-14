@@ -472,6 +472,87 @@ The API will return four error types when requests fail:
 }
 ```
 
+#### GET /policies/users/user_id
+- General:
+    - Fetches all privacy policy that had been generated so far by the user whose id is passed as parameter in the request url
+    - Request Arguments: id of the user whose all privacy policy want to be fetched
+    - Returns: An object with details of all the privacy policy associated with the id that was passed as parameter
+- Sample: `https://team-vulture2-backend.vercel.app/policies/users/639856d4d7dee48e6da86635`
+```
+{
+    "success": true,
+    "message": "Privacy Policies found for New User",
+    "policies": [
+        {
+            "_id": "639a409ce231707cf6194e76",
+            "name": "Sample Website One Policy",
+            "user_id": "639856d4d7dee48e6da86635",
+            "data": {
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "full name",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "_id": "639a409ce231707cf6194e77"
+            },
+            "policyType": "NDPR",
+            "createdAt": "2022-12-14T21:31:08.538Z",
+            "updatedAt": "2022-12-14T21:31:08.538Z",
+            "__v": 0
+        },
+        {
+            "_id": "639a40bae231707cf6194e7c",
+            "name": "Sample Website Three Policy",
+            "user_id": "639856d4d7dee48e6da86635",
+            "data": {
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "_id": "639a40bae231707cf6194e7d"
+            },
+            "policyType": "NDPR",
+            "createdAt": "2022-12-14T21:31:38.924Z",
+            "updatedAt": "2022-12-14T21:31:38.924Z",
+            "__v": 0
+        }
+    ],
+    "total": 2
+}
+```
+
 #### PUT /policies/:id
 - General:
     - edit/update a specified privacy policy details using the id of the privacy policy
@@ -543,6 +624,19 @@ The API will return four error types when requests fail:
         "updatedAt": "2022-12-13T10:57:37.212Z",
         "__v": 0
     }
+}
+```
+
+#### DELETE policies/users/:user_id
+- General:
+    - Deletes all privacy policy for the user whose id was specified
+    - Request Arguments: id of a user whose all privacy policies is to be deleted 
+    - Returns: deleted successfully message containing the name of the user whose privacy policies were deleted
+- Sample: `https://team-vulture2-backend.vercel.app/policies/users/639856d4d7dee48e6da86635`
+```
+{
+    "success": true,
+    "message": "Privacy Policies for New User deleted successfully"
 }
 ```
 
@@ -709,6 +803,87 @@ The API will return four error types when requests fail:
     "total": 2
 }
 ```
+#### GET /terms/users/user_id
+- General:
+    - Fetches all terms and conditions that had been generated so far by the user whose id is passed as parameter in the request url
+    - Request Arguments: id of the user whose all terms and conditions want to be fetched
+    - Returns: An object with details of all the terms and conditions associated with the id that was passed as parameter
+- Sample: `https://team-vulture2-backend.vercel.app/terms/639856d4d7dee48e6da86635`
+```
+{
+    "success": true,
+    "message": "Terms and conditions found for New User",
+    "policies": [
+        {
+            "_id": "639a434de231707cf6194e8b",
+            "name": "Sample Website One Terms and Conditions",
+            "user_id": "639856d4d7dee48e6da86635",
+            "data": {
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "full name",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "_id": "639a434de231707cf6194e8c"
+            },
+            "termType": "NDPR",
+            "createdAt": "2022-12-14T21:42:37.124Z",
+            "updatedAt": "2022-12-14T21:42:37.124Z",
+            "__v": 0
+        },
+        {
+            "_id": "639a4353e231707cf6194e8e",
+            "name": "Sample Website Two Terms and Conditions",
+            "user_id": "639856d4d7dee48e6da86635",
+            "data": {
+                "whereDetails": {
+                    "websiteUrl": "https://www.samplewebsite.com",
+                    "websiteName": "Sample website",
+                    "entityType": "business",
+                    "country": "Nigeria"
+                },
+                "contact": {
+                    "email": "contact@samplewebsite.com",
+                    "phoneNumber": "08134263292",
+                    "webPage": "https://www.samplewebsite.com/contact.html"
+                },
+                "where": [
+                    "website"
+                ],
+                "informationType": [
+                    "email",
+                    "full name",
+                    "address",
+                    "social media",
+                    "others"
+                ],
+                "_id": "639a4353e231707cf6194e8f"
+            },
+            "termType": "NDPR",
+            "createdAt": "2022-12-14T21:42:43.729Z",
+            "updatedAt": "2022-12-14T21:42:43.729Z",
+            "__v": 0
+        }
+    ],
+    "total": 2
+}
+```
 
 #### GET /terms/:id
 - General:
@@ -819,6 +994,20 @@ The API will return four error types when requests fail:
     }
 }
 ```
+
+#### DELETE termes/users/:user_id
+- General:
+    - Deletes all the terms and conditions using associated tpo the user whose the id was specified
+     - Request Arguments: id of a user whose all terms and conditions are to be deleted 
+    - Returns: deleted successfully message containing the name of the user whose terms and conditions were deleted
+- Sample: `https://team-vulture2-backend.vercel.app/terms/users/639856d4d7dee48e6da86635`
+```
+{
+    "success": true,
+    "message": "Terms and conditions for New User deleted successfully"
+}
+```
+
 
 #### DELETE terms/:id
 - General:
