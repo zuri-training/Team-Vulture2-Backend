@@ -39,7 +39,7 @@ const termSchema = new mongoose.Schema({
         required:true
     },
     //The terms and conditions include necessary provision for:
-    policyType: {
+    termType: {
         type: String,
         default: "NDPR",
         unique: false,

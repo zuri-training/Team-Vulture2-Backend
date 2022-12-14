@@ -258,12 +258,12 @@ exports.getAllPolicies = async (req, res)=>{
         if(!policies.length === 0){
              return res.status(404).json({
                 success: false,
-                message: "no policy was found"
+                message: "Privacy policy not found"
             })
         }
         return res.status(200).json({
             success: true,
-            message: "Policies found",
+            message: "Privacy Policies found",
             policies: policies,
             total: policies.length
         })        
@@ -284,12 +284,12 @@ exports.getPolicy = async (req, res)=>{
         if(!policy){
              return res.status(404).json({
                 success: false,
-                message: "Policy not found"
+                message: "Privacy Policy not found"
             })
         }
         return res.status(200).json({
             success: true,
-            message: "Policy found",
+            message: "Privacy Policy found",
             policy
         })         
     } catch (error) {
@@ -301,8 +301,62 @@ exports.getPolicy = async (req, res)=>{
     }
 }
 
-//Policy controller
-//create policy
+//edit term
+exports.updatePolicy = async (req, res)=>{
+    try {
+        let update = await req.body
+        const newPolicy = await Policy.findByIdAndUpdate(req.params.id, {
+            name: update.name,
+            data: update.data,
+            policyType: update.policyType
+        })
+        if(!newPolicy){
+             return res.status(404).json({
+                success: false,
+                message: "Privacy Policy not updated"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Privacy Policy updated successfully",
+            newPolicy
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//delete policy
+exports.deletePolicy = async (req, res)=>{
+    try {
+        const policy = await Policy.findByIdAndDelete(req.params.id)
+        if(!policy){
+             return res.status(400).json({
+                success: false,
+                message: "Privacy Policy not deleted"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Privacy Policy deleted successfully"
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+
+
+//Term controller
+//create term
 exports.addTerm= async (req, res)=>{
     try {
         const term = await req.body
@@ -327,7 +381,7 @@ exports.addTerm= async (req, res)=>{
     }
 }
 
-//get all policies
+//get all terms
 exports.getAllTerms = async (req, res)=>{
     try {
         const terms = await Term.find({})
@@ -352,8 +406,7 @@ exports.getAllTerms = async (req, res)=>{
     }
 }
 
-
-//get single policy
+//get single term
 exports.getTerm = async (req, res)=>{
     try {
         const term = await Term.findById(req.params.id)
@@ -367,6 +420,58 @@ exports.getTerm = async (req, res)=>{
             success: true,
             message: "Terms and Conditions found",
             term
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//edit term
+exports.updateTerm = async (req, res)=>{
+    try {
+        let update = await req.body
+        const newTerm = await Term.findByIdAndUpdate(req.params.id, {
+            name: update.name,
+            data: update.data,
+            termType: update.termType
+        })
+        if(!newTerm){
+             return res.status(404).json({
+                success: false,
+                message: "Terms and Conditions not updated"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Terms and Conditions updated successfully",
+            newTerm
+        })         
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error.message
+        })
+    }
+}
+
+//delete term with the permission to admins alone
+exports.deleteTerm = async (req, res)=>{
+    try {
+        const term = await Term.findByIdAndDelete(req.params.id)
+        if(!term){
+             return res.status(400).json({
+                success: false,
+                message: "Terms and Conditions not deleted"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Terms and Conditions deleted successfully"
         })         
     } catch (error) {
         res.status(500).json({
