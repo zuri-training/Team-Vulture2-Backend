@@ -15,23 +15,36 @@ const termSchema = new mongoose.Schema({
     //data that will be used to generate the terms and conditions
     data: {
         type:{
-            //Website Name
-           websiteName: String,
-           //Website URL
-           websiteUrl: String,
-           //Country of operation defaulted to Nigeria for now
-           country: {
-            type: String,
-            default: "Nigeria"
-           },
-           //Email Address
-           email: String,
-           //Entity type (whether business or individual)
-           entityType: String
+            //Where will your terms and conditions be used?
+            where: [],
+            whereDetails: {
+                websiteUrl: String,
+                websiteName: String,
+                entityType: String,
+                country: {
+                    type:String,
+                    default: "Nigeria"
+                }
+            },
+            //What kind of information do you collect from user?
+            informationType: [],
+            //How can user contact you for question regarding terms and conditions?
+            contact: {
+                email: String,
+                phoneNumber: String,
+                webPage: String
+            }
         },
         unique: false,
         required:true
-    }    
+    },
+    //The terms and conditions include necessary provision for:
+    policyType: {
+        type: String,
+        default: "NDPR",
+        unique: false,
+        required:false
+    },    
 }, {timestamps: true})
 const Term = mongoose.model("terms", termSchema)
 
