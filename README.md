@@ -69,7 +69,6 @@ The API will return four error types when requests fail:
     - Request Body: the body will be passed as a raw json data
     ```
     {
-        "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
@@ -85,7 +84,6 @@ The API will return four error types when requests fail:
     "message": "new user registered",
     "user": {
         "user_id": "63962a19683eedcd74dcede0"
-        "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
@@ -107,7 +105,6 @@ The API will return four error types when requests fail:
     "users": [
         {
             "_id": "639856d4d7dee48e6da86635",
-            "username": "User",
             "email": "user@mail.com",
             "firstName": "New",
             "lastName": "User",
@@ -119,7 +116,6 @@ The API will return four error types when requests fail:
         },
         {
             "_id": "6398e4ecb03eedcb216e2d37",
-            "username": "Tolulophey",
             "email": "sample@mail.com",
             "firstName": "Tolulope",
             "lastName": "Amole",
@@ -131,7 +127,6 @@ The API will return four error types when requests fail:
         },
         {
             "_id": "6398e516b03eedcb216e2d3b",
-            "username": "User2",
             "email": "user2@mail.com",
             "firstName": "New",
             "lastName": "User",
@@ -158,7 +153,6 @@ The API will return four error types when requests fail:
     "message": "User found",
     "user": {
         "user_id": "6396283a76dcb966709f7361",
-        "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
@@ -173,7 +167,6 @@ The API will return four error types when requests fail:
     - Request Arguments: the http url containing the id of the user and a raw json data request body in the format below
     ```
     {
-        "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
@@ -188,7 +181,6 @@ The API will return four error types when requests fail:
     "message": "User updated successfully",
     "user": {
         "_id": "6396283a76dcb966709f7361",
-        "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
@@ -228,7 +220,6 @@ The API will return four error types when requests fail:
     "message": "User found",
     "user": {
         "user_id": "63962c1a683eedcd74dcede7",
-        "username": "User1",
         "email": "user1e@mail.com",
         "firstName": "New",
         "lastName": "User",
