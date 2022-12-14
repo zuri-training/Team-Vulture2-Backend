@@ -1,6 +1,7 @@
 const express = require("express")
 const fs = require("fs")
 const path = require("path")
+const cors = require('cors');
 const {config} = require("dotenv")
 const connect = require("./src/config/database")
 const route = require("./src/router/route")
@@ -9,6 +10,7 @@ config()
 const port = process.env.PORT || 3000
 const app = express()
 app.use(express.json())
+app.use(cors())
 app.use("/", route)
 app.get("/", (req, res)=>{
     const filePath = path.join(__dirname, "src", "documentation", "index.html")
