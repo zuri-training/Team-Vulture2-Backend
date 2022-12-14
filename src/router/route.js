@@ -3,12 +3,12 @@ const controller = require("../controller/controller")
 
 
 router
-.post("/users", controller.registerUser)
+.post("/users/register", controller.registerUser)
 .get("/users", controller.getAllUsers)
 .get("/users/:id", controller.getUser)
 .put("/users/:id", controller.updateUser)
 .delete("/users/:id", controller.deleteUser)
-.post("/login", controller.loginUser)
+.post("/users/login", controller.loginUser)
 .put("/users/:id/password", controller.changePassword)
 .post("/policies", controller.addPolicy)
 .get("/policies", controller.getAllPolicies)
